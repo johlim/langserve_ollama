@@ -29,7 +29,7 @@ async def redirect_root_to_docs():
     return RedirectResponse("/chat/playground")
 
 
-add_routes(app, chain, path="/prompt")
+add_routes(app, chain, path="/prompt") # chain = prompt | llm | StrOutputParser()
 
 
 class InputChat(BaseModel):
@@ -43,18 +43,18 @@ class InputChat(BaseModel):
 
 add_routes(
     app,
-    chat_chain.with_types(input_type=InputChat),
+    chat_chain.with_types(input_type=InputChat),#chat_chain is chain = prompt | llm | StrOutputParser()
     path="/chat",
     enable_feedback_endpoint=True,
     enable_public_trace_link_endpoint=True,
     playground_type="chat",
 )
 
-add_routes(app, EN_TO_KO_chain, path="/translate")
+add_routes(app, EN_TO_KO_chain, path="/translate") # EN_TO_KO_chain is chain = prompt | llm | StrOutputParser()
 
-add_routes(app, model, path="/llm")
+add_routes(app, model, path="/llm") # model is llm = ChatOllama(model="EEVE-Korean-10.8B:latest")
 
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="127.0.0.1", port=80)
+    uvicorn.run(app, host="0.0.0.0", port=80)
