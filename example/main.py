@@ -30,11 +30,11 @@ if not USE_BGE_EMBEDDING:
 # 1) REMOTE 접속: 본인의 REMOTE LANGSERVE 주소 입력
 # (예시)
 # LANGSERVE_ENDPOINT = "https://poodle-deep-marmot.ngrok-free.app/llm/"
-LANGSERVE_ENDPOINT = "https://NGROK에서_할당받은_URL/llm/"
+# LANGSERVE_ENDPOINT = "https://NGROK에서_할당받은_URL/llm/"
 
 # 2) LocalHost 접속: 끝에 붙는 N4XyA 는 각자 다르니
 # http://localhost:8000/llm/playground 에서 python SDK 에서 확인!
-# LANGSERVE_ENDPOINT = "http://localhost:8000/llm/c/N4XyA"
+LANGSERVE_ENDPOINT = "http://localhost/llm/c/N4XyA"
 
 # 필수 디렉토리 생성 @Mineru
 if not os.path.exists(".cache"):
@@ -100,8 +100,8 @@ def embed_file(file):
         # - Mac M1, M2, M3: "mps"
         # - CPU: "cpu"
         model_kwargs = {
-            # "device": "cuda"
-            "device": "mps"
+            "device": "cuda"
+            # "device": "mps"
             # "device": "cpu"
         }
         encode_kwargs = {"normalize_embeddings": True}
